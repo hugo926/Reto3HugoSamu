@@ -49,4 +49,38 @@ public class ClientesDao {
 			Conexion.cierraConexion();
 		}
 	}
+	public static Clientes buscarXcodigo(int cod) {
+	
+		Clientes c=null;	
+		try {
+			Connection con= Conexion.abreConexion();
+			PreparedStatement pst=con.prepareStatement("select * from clientes where codigo = ?");
+			pst.setInt(1, cod);
+			ResultSet rs = pst.executeQuery();
+			if (rs.next()) {
+				c= new Clientes(rs.getInt("idCliente"),rs.getString("nombre"),rs.getString("direccion"),rs.getInt("codigo"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			Conexion.cierraConexion();
+		}
+		return c;
+	}
+	public static void actualiza(Clientes c) {
+		try {
+			Connection con= Conexion.abreConexion();
+			PreparedStatement pst=con.prepareStatement("update clientes set nombre=?, direccion=?, codigo=? where idcliente=?");
+			pst.setString(1, c.getNombre());
+			pst.setString(2, c.getDireccion());
+			pst.setInt(3, c.getCodigo());
+			pst.setInt(4, c.getIdCliente());
+			
+			pst.execute();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
