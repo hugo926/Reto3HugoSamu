@@ -1,5 +1,6 @@
 package main;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,16 +19,19 @@ public class Menu {
 					sc);
 			switch (opcion) {
 			case 1:
-				menuMantenimientos();
+				menuMantenimientos(sc);
 
 				break;
 			case 2:
+				menuCatalogoProductos(sc);
 
 				break;
 			case 3:
+				menuPedidos(sc);
 
 				break;
 			case 4:
+				menuInformes(sc);
 
 				break;
 
@@ -38,8 +42,78 @@ public class Menu {
 
 	}
 
-	public static void menuMantenimientos() {
-		Scanner sc = new Scanner(System.in);
+	public static void menuInformes(Scanner sc) {
+		int opcion4 = 0;
+		do {
+			opcion4 = util.Validarfunciones
+					.dimeEntero("4.1-.Bajo Stock\n4.2-.Pedidos por cliente\n4.3-.Productos mas vendidos\n4-.Salir", sc);
+			switch (opcion4) {
+			case 1:
+
+				break;
+			case 2:
+
+				break;
+			case 3:
+
+				break;
+			default:
+				break;
+			}
+		} while (opcion4 > 4 || opcion4 <= 0 );
+	}
+
+	public static void menuCatalogoProductos(Scanner sc) {
+		int opcion3 = 0;
+		do {
+			opcion3 = util.Validarfunciones.dimeEntero("2.1-.Listar productos por categoria\n2.2-.Buscar productos\n3-.Salir",
+					sc);
+			switch (opcion3) {
+			case 1:
+				mostrarCategorias();
+				int categoriaElegida = util.Validarfunciones.dimeEntero("Introduce una opcion", sc);
+				/// verifico que existe la categoria y la devuelvo para mostrar los productos
+				/// filtrados por ella
+
+				Categorias c = verificarCategoria(categoriaElegida);
+				mostrarPorductosXcategoria(c);
+
+				break;
+			case 2:
+
+				break;
+			default:
+				break;
+			}
+		} while (opcion3 > 3 || opcion3 <= 0);
+	}
+
+	public static void mostrarPorductosXcategoria(Categorias c) {
+		List<Productos> listaXCategoria = dao.ProductosDao.listaProductosXcategoria(c);
+		for (Productos productos : listaXCategoria) {
+			System.out.println(productos);
+		}
+	}
+
+	public static void menuPedidos(Scanner sc) {
+		int opcion3 = 0;
+		do {
+			opcion3 = util.Validarfunciones.dimeEntero("3.1-.Crear pedido\n3.2-.Ver pedidos\n3-.Salir", sc);
+			switch (opcion3) {
+			case 1:
+
+				break;
+			case 2:
+
+				break;
+			default:
+				break;
+			}
+		} while (opcion3 >3 || opcion3 <= 0 );
+	}
+
+	public static void menuMantenimientos(Scanner sc) {
+
 		int opcion2 = 0;
 		do {
 			opcion2 = util.Validarfunciones.dimeEntero(
@@ -74,13 +148,13 @@ public class Menu {
 				break;
 
 			case 3:
-				menuGestionClientes();
+				menuGestionClientes(sc);
 				break;
 
 			default:
 				break;
 			}
-		} while (opcion2 > 3 || opcion2 <= 0);
+		} while (opcion2 > 3 || opcion2 <= 0 );
 	}
 
 	public static Categorias verificarCategoria(int categoriaElegida) {
@@ -103,8 +177,8 @@ public class Menu {
 		}
 	}
 
-	public static void menuGestionClientes() {
-		Scanner sc = new Scanner(System.in);
+	public static void menuGestionClientes(Scanner sc) {
+
 		int opcion3 = 0;
 		do {
 			opcion3 = util.Validarfunciones.dimeEntero("1-.Alta de nuevos clientes\n2-.Busqueda por codigo\n3-.Salir",
@@ -143,7 +217,7 @@ public class Menu {
 				break;
 			}
 
-		} while (opcion3 > 2 || opcion3 <= 0);
+		} while (opcion3 > 3 || opcion3 <= 0 );
 	}
 
 }
