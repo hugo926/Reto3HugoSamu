@@ -4,12 +4,12 @@ public class Productos {
 private int idProducto;
 private Categorias idCategoria;
 private String nombre;
-private int precio;
+private double precio;
 private String descripcion;
 private String color;
 private String talla;
 private int Stock;
-public Productos(int idProducto, Categorias idCategoria, String nombre, int precio, String descripcion, String color,
+public Productos(int idProducto, Categorias idCategoria, String nombre, double precio, String descripcion, String color,
 		String talla, int stock) {
 	super();
 	this.idProducto = idProducto;
@@ -49,11 +49,11 @@ public void setNombre(String nombre) {
 	this.nombre = nombre;
 }
 
-public int getPrecio() {
+public double getPrecio() {
 	return precio;
 }
 
-public void setPrecio(int precio) {
+public void setPrecio(double precio) {
 	this.precio = precio;
 }
 

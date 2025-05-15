@@ -1,6 +1,6 @@
 package dao;
 
-import java.beans.Statement;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -46,7 +46,7 @@ public class ProductosDao {
 					+ "values (?,?,?,?,?,?,?);", java.sql.Statement.RETURN_GENERATED_KEYS);
 			pst.setInt(1, producto.getIdCategoria().getIdCategoria()); //en BD es int entonces cojo categroia y luego de categoria cojo id(int) 
 			pst.setString(2, producto.getNombre());
-			pst.setInt(3, producto.getPrecio());
+			pst.setDouble(3, producto.getPrecio());
 			pst.setString(4, producto.getDescripcion());
 			pst.setString(5, producto.getColor());
 			pst.setString(6, producto.getTalla());
