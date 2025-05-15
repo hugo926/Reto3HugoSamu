@@ -88,6 +88,12 @@ public int getStock() {
 public void setStock(int stock) {
 	Stock = stock;
 }
+@Override
+public String toString() {
+	return "Productos [idProducto=" + idProducto + ", idCategoria=" + idCategoria + ", nombre=" + nombre + ", precio="
+			+ precio + ", descripcion=" + descripcion + ", color=" + color + ", talla=" + talla + ", Stock=" + Stock
+			+ "]";
+}
 
 
 
