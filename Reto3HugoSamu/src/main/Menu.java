@@ -60,14 +60,14 @@ public class Menu {
 			default:
 				break;
 			}
-		} while (opcion4 > 4 || opcion4 <= 0 );
+		} while (opcion4 > 4 || opcion4 <= 0);
 	}
 
 	public static void menuCatalogoProductos(Scanner sc) {
 		int opcion3 = 0;
 		do {
-			opcion3 = util.Validarfunciones.dimeEntero("2.1-.Listar productos por categoria\n2.2-.Buscar productos\n3-.Salir",
-					sc);
+			opcion3 = util.Validarfunciones
+					.dimeEntero("2.1-.Listar productos por categoria\n2.2-.Buscar productos\n3-.Salir", sc);
 			switch (opcion3) {
 			case 1:
 				mostrarCategorias();
@@ -80,6 +80,13 @@ public class Menu {
 
 				break;
 			case 2:
+				String nombreProductos = util.Validarfunciones.dimeString("Introduce nombre de producto a buscar", sc);
+				String color = util.Validarfunciones.dimeString("Introduce el color que quieras", sc);
+				String talla = util.Validarfunciones.dimeString("Introduce la talla que quieras", sc);
+			
+				
+			mostrarPorductosXBusqueda(nombreProductos, talla, color);
+				
 
 				break;
 			default:
@@ -91,6 +98,12 @@ public class Menu {
 	public static void mostrarPorductosXcategoria(Categorias c) {
 		List<Productos> listaXCategoria = dao.ProductosDao.listaProductosXcategoria(c);
 		for (Productos productos : listaXCategoria) {
+			System.out.println(productos);
+		}
+	}
+	public static void mostrarPorductosXBusqueda(String nombre,String talla,String color) {
+		List<Productos> listaXBusqueda = dao.ProductosDao.buscarProducto(nombre,talla,color);
+		for (Productos productos : listaXBusqueda) {
 			System.out.println(productos);
 		}
 	}
@@ -109,7 +122,7 @@ public class Menu {
 			default:
 				break;
 			}
-		} while (opcion3 >3 || opcion3 <= 0 );
+		} while (opcion3 > 3 || opcion3 <= 0);
 	}
 
 	public static void menuMantenimientos(Scanner sc) {
@@ -154,7 +167,7 @@ public class Menu {
 			default:
 				break;
 			}
-		} while (opcion2 > 3 || opcion2 <= 0 );
+		} while (opcion2 > 3 || opcion2 <= 0);
 	}
 
 	public static Categorias verificarCategoria(int categoriaElegida) {
@@ -217,7 +230,7 @@ public class Menu {
 				break;
 			}
 
-		} while (opcion3 > 3 || opcion3 <= 0 );
+		} while (opcion3 > 3 || opcion3 <= 0);
 	}
 
 }
