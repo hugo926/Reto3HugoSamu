@@ -98,7 +98,7 @@ public void setStock(int stock) {
 }
 @Override
 public String toString() {
-	return "Productos [nombre=" + nombre + ", precio="
+	return "Productos [ categoria= "+idCategoria.getNombre() +", nombre=" + nombre + ", precio="
 			+ precio + ", descripcion=" + descripcion + ", color=" + color + ", talla=" + talla + ", Stock=" + Stock
 			+ "]";
 }

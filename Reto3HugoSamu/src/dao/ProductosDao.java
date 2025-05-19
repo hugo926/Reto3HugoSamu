@@ -108,7 +108,7 @@ public class ProductosDao {
 		}
 		return lista;
 	}
-
+///se utiliza para buscar productos y si falta algun filtro
 	public static void filtros(String nombre, String talla, String color, PreparedStatement pst) throws SQLException {
 		if (nombre.equals("")) {
 			if (talla.equals("")) {
