@@ -77,11 +77,24 @@ public class ProductosDao {
 	try {
 		Connection con = Conexion.abreConexion();
 		
-		PreparedStatement pst = con.prepareStatement("select idproducto, c.idcategoria,c.nombre as nombreCat, p.nombre, precio, descripcion, color, talla, stock from productos p\r\n"
-				+ "inner join categorias c on p.idcategoria = c.idcategoria\r\n"
-				+ "where p.nombre = % or p.talla = % or p.color = % \r\n"
-				+ "order by idproducto;");
+
 		
+
+		String texto= "select idproducto, c.idcategoria,c.nombre as nombreCat, p.nombre, precio, descripcion, color, talla, stock from productos p\r\n"
+				+ "inner join categorias c on p.idcategoria = c.idcategoria"
+				+ "where 1 = 1"; 
+		if (!nombre.equals("")) {
+			texto=texto+"and p.nombre=nombre";
+		}
+		if (!talla.equals("")) {
+			texto=texto+"and p.talla=talla";
+		}
+		if (!color.equals("")) {
+			texto=texto+"and p.color=color";
+		}
+		
+		PreparedStatement pst = con.prepareStatement(texto + "order by idproducto;");
+
 		pst.setString(1, nombre);
 		pst.setString(2, talla);
 		pst.setString(3, color);
