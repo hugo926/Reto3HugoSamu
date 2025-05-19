@@ -76,21 +76,18 @@ public class ProductosDao {
 		List <Productos> lista = new ArrayList<Productos>();
 	try {
 		Connection con = Conexion.abreConexion();
-		
-
-		
 
 		String texto= "select idproducto, c.idcategoria,c.nombre as nombreCat, p.nombre, precio, descripcion, color, talla, stock from productos p\r\n"
 				+ "inner join categorias c on p.idcategoria = c.idcategoria"
 				+ "where 1 = 1"; 
 		if (!nombre.equals("")) {
-			texto=texto+"and p.nombre=nombre";
+			texto=texto+"and p.nombre=?";
 		}
 		if (!talla.equals("")) {
-			texto=texto+"and p.talla=talla";
+			texto=texto+"and p.talla=?";
 		}
 		if (!color.equals("")) {
-			texto=texto+"and p.color=color";
+			texto=texto+"and p.color=?";
 		}
 		
 		PreparedStatement pst = con.prepareStatement(texto + "order by idproducto;");
