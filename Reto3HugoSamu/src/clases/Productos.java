@@ -25,6 +25,14 @@ public Productos() {
 	super();
 }
 
+public Productos(String nombre, double precio, String descripcion, String color, String talla, int stock) {
+	this.nombre = nombre;
+	this.precio = precio;
+	this.descripcion = descripcion;
+	this.color = color;
+	this.talla = talla;
+	Stock = stock;
+}
 public int getIdProducto() {
 	return idProducto;
 }
@@ -90,7 +98,7 @@ public void setStock(int stock) {
 }
 @Override
 public String toString() {
-	return "Productos [idProducto=" + idProducto + ", idCategoria=" + idCategoria + ", nombre=" + nombre + ", precio="
+	return "Productos [nombre=" + nombre + ", precio="
 			+ precio + ", descripcion=" + descripcion + ", color=" + color + ", talla=" + talla + ", Stock=" + Stock
 			+ "]";
 }

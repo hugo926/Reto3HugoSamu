@@ -47,7 +47,7 @@ public class ProductosDao {
 		try {
 			Connection con = Conexion.abreConexion();
 			
-			PreparedStatement pst = con.prepareStatement("select idproducto, c.idcategoria,c.nombre as nombreCat, p.nombre, precio, descripcion, color, talla, stock from productos p\r\n"
+			PreparedStatement pst = con.prepareStatement("select  p.nombre, precio, descripcion, color, talla, stock from productos p\r\n"
 					+ "inner join categorias c on p.idcategoria = c.idcategoria \r\n"
 					+ "where c.idcategoria = ?\r\n"
 					+ "order by idproducto;");
@@ -56,8 +56,8 @@ public class ProductosDao {
 			
 			while(rs.next()) //bucle mientras exista un resultado a continuacion del anterior
 			{
-				Categorias cat = new Categorias(rs.getInt("idcategoria"), rs.getString("nombreCat"));
-				lista.add(new Productos(rs.getInt("idproducto"), cat , rs.getString("nombre"), rs.getDouble("precio"),rs.getString("descripcion"),rs.getString("color"),rs.getString("talla"),rs.getInt("stock")));
+			//	Categorias cat = new Categorias(rs.getInt("idcategoria"), rs.getString("nombreCat"));
+				lista.add(new Productos( rs.getString("nombre"), rs.getDouble("precio"),rs.getString("descripcion"),rs.getString("color"),rs.getString("talla"),rs.getInt("stock")));
 			}
 			rs.close();
 			
