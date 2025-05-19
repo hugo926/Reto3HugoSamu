@@ -81,6 +81,7 @@ public class ProductosDao {
 				+ "inner join categorias c on p.idcategoria = c.idcategoria\r\n"
 				+ "where p.nombre = % or p.talla = % or p.color = % \r\n"
 				+ "order by idproducto;");
+		
 		pst.setString(1, nombre);
 		pst.setString(2, talla);
 		pst.setString(3, color);
