@@ -12,6 +12,29 @@ import clases.Productos;
 import util.Conexion;
 
 public class ProductosDao {
+	public static List<Productos> productosXstock(){
+		List<Productos> lista = new ArrayList<Productos>();
+		try {
+		Connection con = Conexion.abreConexion();
+		PreparedStatement pst=con.prepareStatement("select idcategoria, nombre, precio, descripcion, color, talla, stock from  productos\r\n"
+				+ "where stock<=5;");
+		ResultSet rs = pst.executeQuery(); 
+		while (rs.next()) 
+		{
+			Categorias cat = new Categorias(rs.getInt("idcategoria"), rs.getString("nombreCat"));
+		lista.add(new Productos(rs.getInt("idproducto"), cat, rs.getString("nombre"), rs.getDouble("precio"),
+						rs.getString("descripcion"), rs.getString("color"), rs.getString("talla"), rs.getInt("stock")));
+		}
+		rs.close();
+
+	} catch (Exception e) {
+		e.printStackTrace();
+	} finally {
+		Conexion.cierraConexion();
+	}
+
+	return lista;
+	}
 
 	public static List<Productos> listaProductos() {
 

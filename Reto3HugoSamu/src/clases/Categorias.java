@@ -10,6 +10,13 @@ public Categorias(int idCategoria, String nombre) {
 	this.nombre = nombre;
 }
 
+
+public Categorias(int idCategorias) {
+	super();
+	this.idCategorias = idCategorias;
+}
+
+
 public Categorias() {
 	super();
 }

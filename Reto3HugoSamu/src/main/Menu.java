@@ -7,6 +7,7 @@ import java.util.Scanner;
 import clases.Categorias;
 import clases.Clientes;
 import clases.Productos;
+import util.Validarfunciones;
 
 public class Menu {
 
@@ -38,7 +39,7 @@ public class Menu {
 			default:
 				break;
 			}
-		} while (opcion > 5 || opcion <= 0);
+		} while (opcion != 5);
 
 	}
 
@@ -60,7 +61,7 @@ public class Menu {
 			default:
 				break;
 			}
-		} while (opcion4 > 4 || opcion4 <= 0);
+		} while (opcion4 != 4);
 	}
 
 	public static void menuCatalogoProductos(Scanner sc) {
@@ -71,7 +72,21 @@ public class Menu {
 			switch (opcion3) {
 			case 1:
 				mostrarCategorias();
-				int categoriaElegida = util.Validarfunciones.dimeEntero("Introduce una opcion", sc);
+				boolean salir = false;
+				int categoriaElegida = 0;
+				do {
+
+					categoriaElegida = util.Validarfunciones.dimeEntero("Introduce una opcion", sc);
+					/// verifico que existe la categoria y la devuelvo para insertar el produto en
+					/// ella
+
+					if (verificarCategoria(categoriaElegida) == null)
+						salir = true;
+					else
+						salir = false;
+
+				} while (salir);
+
 				/// verifico que existe la categoria y la devuelvo para mostrar los productos
 				/// filtrados por ella
 
@@ -80,29 +95,28 @@ public class Menu {
 
 				break;
 			case 2:
-				String nombreProductos = util.Validarfunciones.dimeString("Introduce nombre de producto a buscar", sc);
-				String color = util.Validarfunciones.dimeString("Introduce el color que quieras", sc);
-				String talla = util.Validarfunciones.dimeString("Introduce la talla que quieras", sc);
-			
-				
-			mostrarPorductosXBusqueda(nombreProductos, talla, color);
-				
+				String nombreProductos = util.Validarfunciones.dimeString2("Introduce nombre de producto a buscar", sc);
+				String color = util.Validarfunciones.dimeString2("Introduce el color que quieras", sc);
+				String talla = util.Validarfunciones.dimeString2("Introduce la talla que quieras", sc);
+
+				mostrarPorductosXBusqueda(nombreProductos, talla, color);
 
 				break;
 			default:
 				break;
 			}
-		} while (opcion3 > 3 || opcion3 <= 0);
+		} while (opcion3 != 3);
 	}
 
 	public static void mostrarPorductosXcategoria(Categorias c) {
 		List<Productos> listaXCategoria = dao.ProductosDao.listaProductosXcategoria(c);
 		for (Productos productos : listaXCategoria) {
-			System.out.println(productos);
+			System.out.println(productos.imprimir());
 		}
 	}
-	public static void mostrarPorductosXBusqueda(String nombre,String talla,String color) {
-		List<Productos> listaXBusqueda = dao.ProductosDao.buscarProducto(nombre,talla,color);
+
+	public static void mostrarPorductosXBusqueda(String nombre, String talla, String color) {
+		List<Productos> listaXBusqueda = dao.ProductosDao.buscarProducto(nombre, talla, color);
 		for (Productos productos : listaXBusqueda) {
 			System.out.println(productos);
 		}
@@ -114,6 +128,14 @@ public class Menu {
 			opcion3 = util.Validarfunciones.dimeEntero("3.1-.Crear pedido\n3.2-.Ver pedidos\n3-.Salir", sc);
 			switch (opcion3) {
 			case 1:
+				int codCliente = 0;
+				do {
+
+					codCliente = Validarfunciones.dimeEntero("Introduce un codigo de cliente", sc);
+
+				} while (!verificarIdCliente(codCliente));
+				Clientes clientePedido = dao.ClientesDao.buscarXcodigo(codCliente);
+				System.out.println(clientePedido.getCodigo() +" " + clientePedido.getNombre());
 
 				break;
 			case 2:
@@ -122,7 +144,7 @@ public class Menu {
 			default:
 				break;
 			}
-		} while (opcion3 > 3 || opcion3 <= 0);
+		} while (opcion3 != 3);
 	}
 
 	public static void menuMantenimientos(Scanner sc) {
@@ -149,12 +171,21 @@ public class Menu {
 				int stock = util.Validarfunciones.dimeEntero("Introduce la cantidad de stock", sc);
 
 				mostrarCategorias();
+				int categoriaElegida = 0;
+				boolean salir = false;
+				do {
 
-				int categoriaElegida = util.Validarfunciones.dimeEntero("Introduce una opcion", sc);
-				/// verifico que existe la categoria y la devuelvo para insertar el produto en
-				/// ella
+					categoriaElegida = util.Validarfunciones.dimeEntero("Introduce una opcion", sc);
+					/// verifico que existe la categoria y la devuelvo para insertar el produto en
+					/// ella
 
-				Categorias c = verificarCategoria(categoriaElegida);
+					if (verificarCategoria(categoriaElegida) == null)
+						salir = true;
+					else
+						salir = false;
+
+				} while (salir);
+				Categorias c = new Categorias(categoriaElegida);
 				Productos p = new Productos(1, c, nombreProducto, precioProducto, descripcion, colorProducto,
 						tallaProducto, stock);
 				dao.ProductosDao.insertaProducto(p);
@@ -167,7 +198,20 @@ public class Menu {
 			default:
 				break;
 			}
-		} while (opcion2 > 3 || opcion2 <= 0);
+		} while (opcion2 != 4);
+	}
+
+	public static boolean verificarIdCliente(int clienteCod) {
+
+		List<Clientes> lista = dao.ClientesDao.lista();
+		for (Clientes clientes : lista) {
+			if (clientes.getCodigo() == clienteCod) {
+				return true;
+
+			}
+
+		}
+		return false;
 	}
 
 	public static Categorias verificarCategoria(int categoriaElegida) {
@@ -176,7 +220,7 @@ public class Menu {
 		for (Categorias categorias : lista) {
 			if (categorias.getIdCategoria() == categoriaElegida) {
 				catElegida = categorias;
-
+				break;
 			}
 
 		}
@@ -208,7 +252,7 @@ public class Menu {
 				int codBusqueda = util.Validarfunciones.dimeEntero("Introduce el codigo por el que buscar al cliente",
 						sc);
 				Clientes cl = dao.ClientesDao.buscarXcodigo(codBusqueda);
-				System.out.println(dao.ClientesDao.buscarXcodigo(codBusqueda));
+
 				if (cl == null) {
 					System.out.println("El cliente no existe");
 
@@ -230,7 +274,7 @@ public class Menu {
 				break;
 			}
 
-		} while (opcion3 > 3 || opcion3 <= 0);
+		} while (opcion3 != 3);
 	}
 
 }
