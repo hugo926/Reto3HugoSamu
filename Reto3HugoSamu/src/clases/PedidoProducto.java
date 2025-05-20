@@ -11,13 +11,13 @@ public PedidoProducto() {
 	super();
 }
 
-public PedidoProducto(int idPedidoProducto, Pedidos idPedido, Productos idProducto, int unidades, double precio) {
+public PedidoProducto(int idPedidoProducto, Pedidos idPedido, Productos idProducto, int unidades) {
 	super();
 	this.idPedidoProducto = idPedidoProducto;
 	this.idPedido = idPedido;
 	this.idProducto = idProducto;
 	this.unidades = unidades;
-	this.precio = precio;
+	this.precio = unidades*idProducto.getPrecio();
 }
 
 public int getIdPedidoProducto() {
