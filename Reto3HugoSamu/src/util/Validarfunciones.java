@@ -152,11 +152,11 @@ public class Validarfunciones {
 					return Validarfunciones.convierte_String_a_Date(fecha);
 				}
 				
-				public static Date dimeFechaDate(String texto, Scanner sc)
+				public static Date dimeFechaDate(String textos, Scanner sc)
 				{
 					do {
 						try {
-							System.out.println(texto + " (dd/mm/yyyy)");
+							System.out.println(textos + " (dd/mm/yyyy)");
 							String s = sc.nextLine();
 							SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 							sdf.setLenient(false);
