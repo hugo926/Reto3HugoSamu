@@ -167,7 +167,7 @@ public class Validarfunciones {
 					} while (true);
 				}
 				
-				public static java.sql.Date convierteFecha(Date fecha)
+				public static java.sql.Date convierteFechaASQL(Date fecha)
 				{
 					return new java.sql.Date(fecha.getTime());
 				}
