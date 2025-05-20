@@ -46,7 +46,26 @@ public class Validarfunciones {
 				try {	
 					System.out.println(texto);
 					String s=sc.nextLine();
-					return s;
+					if (!s.isEmpty()) {
+							return s;
+					}
+				
+				} catch (Exception e) {
+					// TODO: handle 
+					System.out.println("Mete un string valido");
+				}
+			} while (true);
+
+	}
+		public static String dimeString2(String texto, Scanner sc) {
+			do {
+				try {	
+					System.out.println(texto);
+					String s=sc.nextLine();
+					
+							return s;
+					
+				
 				} catch (Exception e) {
 					// TODO: handle 
 					System.out.println("Mete un string valido");
