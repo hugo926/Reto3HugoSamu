@@ -131,6 +131,33 @@ public class ProductosDao {
 		}
 		return lista;
 	}
+	
+	public static Productos buscarProductoXNombre(String nombre) {
+
+		Productos p = new Productos();
+		try {
+			Connection con = Conexion.abreConexion();
+
+			String texto = "select idproducto, c.idcategoria,c.nombre as nombreCat, p.nombre, precio, descripcion, color, talla, stock from productos p\r\n"
+					+ "inner join categorias c on p.idcategoria = c.idcategoria" + " where 1 = 1 and p.nombre=?";
+
+			PreparedStatement pst = con.prepareStatement(texto + " order by idproducto;");
+			
+			pst.setString(1, nombre);
+			ResultSet rs = pst.executeQuery();
+
+			while (rs.next()) {
+				Categorias cat = new Categorias(rs.getInt("idcategoria"), rs.getString("nombreCat"));
+			p=(new Productos(rs.getInt("idproducto"), cat, rs.getString("nombre"), rs.getDouble("precio"),
+						rs.getString("descripcion"), rs.getString("color"), rs.getString("talla"), rs.getInt("stock")));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Conexion.cierraConexion();
+		}
+		return p;
+	}
 ///se utiliza para buscar productos y si falta algun filtro
 	public static void filtros(String nombre, String talla, String color, PreparedStatement pst) throws SQLException {
 		if (nombre.equals("")) {
