@@ -28,7 +28,7 @@ public class PedidoProductoDao {
 			ResultSet rs = pst.getGeneratedKeys();
 			// pa coger el idProducto
 			if (rs.next()) {
-				System.out.println("hhd");
+				System.out.println("hhytyd");
 			}
 			rs.close();
 
