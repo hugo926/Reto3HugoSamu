@@ -61,5 +61,24 @@ public class PedidosDao {
 		}
 		return lista;
 	}
+	
+	public static List<Pedidos> verPedidosMes () {
+			List<Pedidos> lista = new ArrayList<Pedidos>();
+			
+			try {
+				Connection con = Conexion.abreConexion();
+				
+				PreparedStatement pst = con.prepareStatement("");
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				Conexion.cierraConexion();
+			}
+			
+			
+			return lista;
+	}
 
 }
