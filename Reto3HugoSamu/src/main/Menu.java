@@ -54,6 +54,13 @@ public class Menu {
 
 				break;
 			case 2:
+				int codCliente = 0;
+				do {
+
+					codCliente = Validarfunciones.dimeEntero("Introduce un codigo de cliente", sc);
+
+				} while (!verificarIdCliente(codCliente));
+				Clientes clientePedido = dao.ClientesDao.buscarXcodigo(codCliente);
 
 				break;
 			case 3:
@@ -116,6 +123,14 @@ public class Menu {
 		}
 	}
 
+	public static List<Productos> mostrarPorductos() {
+		List<Productos> lista = dao.ProductosDao.listaProductos();
+		for (Productos productos : lista) {
+			System.out.println(productos);
+		}
+		return lista;
+	}
+
 	public static void mostrarPorductosXBusqueda(String nombre, String talla, String color) {
 		List<Productos> listaXBusqueda = dao.ProductosDao.buscarProducto(nombre, talla, color);
 		for (Productos productos : listaXBusqueda) {
@@ -129,6 +144,7 @@ public class Menu {
 			opcion3 = util.Validarfunciones.dimeEntero("3.1-.Crear pedido\n3.2-.Ver pedidos\n3-.Salir", sc);
 			switch (opcion3) {
 			case 1:
+				/// boolean salir = false;
 				int codCliente = 0;
 				do {
 
@@ -136,23 +152,36 @@ public class Menu {
 
 				} while (!verificarIdCliente(codCliente));
 				Clientes clientePedido = dao.ClientesDao.buscarXcodigo(codCliente);
-				System.out.println(clientePedido.getCodigo() +" " + clientePedido.getNombre());
-				String nombreProducto="";
+				System.out.println(clientePedido.getCodigo() + " " + clientePedido.getNombre());
+				String nombreProducto = "";
 				do {
-					nombreProducto=util.Validarfunciones.dimeString2("Introduce un nombre de producto o No para terminar", sc);
-		Productos p= dao.ProductosDao.
-					if () {
-	
-				
-			
-					
-						int unidadesProducto=util.Validarfunciones.dimeEntero("Introduce la cantidad de unidades del producto", sc);
-						if (unidadesProducto>) {
-							
+					nombreProducto = util.Validarfunciones
+							.dimeString2("Introduce un nombre de producto o No para terminar", sc);
+					Productos p = dao.ProductosDao.buscarProductoXNombre(nombreProducto);
+					List<Productos> listaproductos = dao.ProductosDao.listaProductos();
+					System.out.println(p);
+					for (Productos productos : listaproductos) {
+						if (productos.getIdProducto() == p.getIdProducto()) {
+
+							int unidadesProducto = util.Validarfunciones
+									.dimeEntero("Introduce la cantidad de unidades del producto", sc);
+							if (unidadesProducto > p.getStock()) {
+								unidadesProducto = p.getStock();
+
+							}
 						}
+
 					}
-					
-				} while (nombreProducto!="No");
+
+					System.out.println(clientePedido.getDireccion() + ", ¿Quieres cambiar direccion? s/n");
+					String cambioDirec = sc.nextLine();
+					if (cambioDirec.equals("s")) {
+						String direccionNueva = util.Validarfunciones.dimeString2("introduce la nueva direccion", sc);
+						clientePedido.setDireccion(direccionNueva);
+
+					}
+
+				} while (!nombreProducto.equals("No"));
 
 				break;
 			case 2:
