@@ -7,6 +7,7 @@ import java.util.Scanner;
 import clases.Categorias;
 import clases.Clientes;
 import clases.Productos;
+import dao.ProductosDao;
 import util.Validarfunciones;
 
 public class Menu {
@@ -136,6 +137,22 @@ public class Menu {
 				} while (!verificarIdCliente(codCliente));
 				Clientes clientePedido = dao.ClientesDao.buscarXcodigo(codCliente);
 				System.out.println(clientePedido.getCodigo() +" " + clientePedido.getNombre());
+				String nombreProducto="";
+				do {
+					nombreProducto=util.Validarfunciones.dimeString2("Introduce un nombre de producto o No para terminar", sc);
+		Productos p= dao.ProductosDao.
+					if () {
+	
+				
+			
+					
+						int unidadesProducto=util.Validarfunciones.dimeEntero("Introduce la cantidad de unidades del producto", sc);
+						if (unidadesProducto>) {
+							
+						}
+					}
+					
+				} while (nombreProducto!="No");
 
 				break;
 			case 2:
