@@ -98,6 +98,7 @@ public class ProductosDao {
 
 	public static List<Productos> buscarProducto(String nombre, String talla, String color) {
 
+		
 		List<Productos> lista = new ArrayList<Productos>();
 		try {
 			Connection con = Conexion.abreConexion();

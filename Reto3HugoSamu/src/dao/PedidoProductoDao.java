@@ -12,6 +12,7 @@ public class PedidoProductoDao {
 	
 	public static void insertaProducto(Productos producto) {
 		
+		
 		try {
 			Connection con = Conexion.abreConexion();
 			PreparedStatement pst = con.prepareStatement(
