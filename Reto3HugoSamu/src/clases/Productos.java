@@ -27,6 +27,11 @@ public class Productos {
 		super();
 	}
 
+	public Productos(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
+
 	public Productos(String nombre, double precio, String descripcion, String color, String talla, int stock) {
 		this.nombre = nombre;
 		this.precio = precio;
