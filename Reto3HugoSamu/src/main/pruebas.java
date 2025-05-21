@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 import clases.Clientes;
 import clases.Pedidos;
+import clases.Productos;
 import dao.PedidosDao;
 import util.Validarfunciones;
 
@@ -13,7 +14,11 @@ public class pruebas {
 
 	public static void main(String[] args) {
 		
-		LocalDate hoy =LocalDate.now();
+		Productos p = dao.ProductosDao.buscarProductoXNombre("Jogger gris");
+		System.out.println(p);
+		
+		
+		/*LocalDate hoy =LocalDate.now();
 		Date fecha =   Validarfunciones.convierte_LocalDate_a_Date(hoy);
 
 		Clientes c= new Clientes(2,"hjose","wf3fv3v",34);
@@ -26,6 +31,7 @@ public class pruebas {
 		}
 		
 		System.out.println("hugo");
+		
 		
 /*		Categorias cat = new Categorias(2,"pantalones");
 	//	dao.CategoriasDao.inserta(cat);
