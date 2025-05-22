@@ -65,18 +65,25 @@ public class PedidosDao {
 	public static List<Pedidos> verPedidosMes () {
 			List<Pedidos> lista = new ArrayList<Pedidos>();
 			
-			/*select p.fecha, c.nombre, p.precioTotal, p.direccionEnvio, cat.nombre, pr.nombre, pp.unidades
-from pedidos p
-inner join clientes c on p.idcliente = c.idcliente
-inner join pedidoproducto pp on p.idpedido = pp.idpedido
-inner join productos pr on pp.idproducto = pr.idproducto
-inner join categorias cat on pr.idcategoria = cat.idcategoria
-where MONTH(p.fecha) = MONTH(now())
-order by fecha desc;*/
 			try {
 				Connection con = Conexion.abreConexion();
 				
-				PreparedStatement pst = con.prepareStatement("");
+				PreparedStatement pst = con.prepareStatement("select p.fecha, c.nombre, p.precioTotal, p.direccionEnvio, cat.nombre, pr.nombre, pp.unidades\r\n"
+						+ "from pedidos p\r\n"
+						+ "inner join clientes c on p.idcliente = c.idcliente\r\n"
+						+ "inner join pedidoproducto pp on p.idpedido = pp.idpedido\r\n"
+						+ "inner join productos pr on pp.idproducto = pr.idproducto\r\n"
+						+ "inner join categorias cat on pr.idcategoria = cat.idcategoria\r\n"
+						+ "where MONTH(p.fecha) = ?\r\n"
+						+ "order by fecha desc;");
+				int mes = LocalDate.now().getMonthValue();
+				pst.setInt(1, mes);
+				ResultSet rs= pst.executeQuery();
+				while(rs.next())
+				{
+					Clientes c = new Clientes(rs.getInt("idcliente"), rs.getString("nombre"), rs.getString("direccion"), rs.getInt("codigo"));
+					lista.add(new Pedidos(rs.getInt("idpedido"),c,rs.getDouble("precioTotal"),rs.getString("direccionEnvio"),rs.getDate("fecha")));
+				}
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -84,7 +91,6 @@ order by fecha desc;*/
 			finally {
 				Conexion.cierraConexion();
 			}
-			
 			
 			return lista;
 	}
