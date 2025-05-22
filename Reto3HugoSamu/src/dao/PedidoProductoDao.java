@@ -14,7 +14,7 @@ public class PedidoProductoDao {
 	public static void insertaProducto(Productos producto, Pedidos pedido, PedidoProducto pp) {
 		
 		try {
-			System.out.println("hola " + pedido.getIdPedido());
+		//	System.out.println("hola " + pedido.getIdPedido());
 			Connection con = Conexion.abreConexion();
 			PreparedStatement pst = con.prepareStatement(
 					"insert into pedidoproducto (idpedido, idproducto, unidades, precio)"
