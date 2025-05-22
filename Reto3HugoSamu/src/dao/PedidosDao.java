@@ -32,7 +32,7 @@ public class PedidosDao {
 			
 			if (rs.next()) {
 				pedido.setIdPedido(rs.getInt(1));
-				System.out.println("Holaa"+pedido.getIdPedido());
+			//	System.out.println("Holaa"+pedido.getIdPedido());
 			}
 			return pedido;
 		} catch (Exception e) {
@@ -71,7 +71,7 @@ public class PedidosDao {
 			try {
 				Connection con = Conexion.abreConexion();
 				
-				PreparedStatement pst = con.prepareStatement("select p.fecha, c.nombre, p.precioTotal, p.direccionEnvio, cat.nombre, pr.nombre, pp.unidades\r\n"
+				PreparedStatement pst = con.prepareStatement("select p.fecha,c.idcliente, c.nombre, p.precioTotal, p.direccionEnvio, cat.nombre, pr.nombre, pp.unidades\r\n"
 						+ "from pedidos p\r\n"
 						+ "inner join clientes c on p.idcliente = c.idcliente\r\n"
 						+ "inner join pedidoproducto pp on p.idpedido = pp.idpedido\r\n"
@@ -84,8 +84,8 @@ public class PedidosDao {
 				ResultSet rs= pst.executeQuery();
 				while(rs.next())
 				{
-					Clientes c = new Clientes(rs.getInt("idcliente"), rs.getString("nombre"), rs.getString("direccion"), rs.getInt("codigo"));
-					lista.add(new Pedidos(rs.getInt("idpedido"),c,rs.getDouble("precioTotal"),rs.getString("direccionEnvio"),rs.getDate("fecha")));
+					Clientes c = new Clientes(0, rs.getString("nombre"), rs.getString("p.direccionEnvio"),0);
+					lista.add(new Pedidos(0,c,rs.getDouble("precioTotal"),rs.getString("p.direccionEnvio"),rs.getDate("fecha")));
 				}
 				
 			} catch (Exception e) {

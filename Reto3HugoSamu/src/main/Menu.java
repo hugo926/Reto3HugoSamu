@@ -205,10 +205,15 @@ public class Menu {
 					//System.out.println("EL pedido se ha guardado");
 					break;
 				} while (!nombreProducto.equals("No"));
+				
 
 				break;
 
 			case 2:
+			List<Pedidos>listaMes=	dao.PedidosDao.verPedidosMes();
+			for (Pedidos pedidos : listaMes) {
+				System.out.println(pedidos);
+			}
 
 				break;
 			default:
