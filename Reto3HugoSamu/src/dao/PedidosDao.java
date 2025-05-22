@@ -97,5 +97,36 @@ public class PedidosDao {
 			
 			return lista;
 	}
+	
+	public static List<Pedidos> verPedidosCliente (Clientes c) {
+		List<Pedidos> lista = new ArrayList<Pedidos>();
+		
+		try {
+			Connection con = Conexion.abreConexion();
+			
+			PreparedStatement pst = con.prepareStatement("select p.fecha, p.precioTotal, p.direccionEnvio, cat.nombre, pr.nombre, pp.unidades\r\n"
+					+ "from pedidos p\r\n"
+					+ "inner join clientes c on p.idcliente = c.idcliente\r\n"
+					+ "inner join pedidoproducto pp on p.idpedido = pp.idpedido\r\n"
+					+ "inner join productos pr on pp.idproducto = pr.idproducto\r\n"
+					+ "inner join categorias cat on pr.idcategoria = cat.idcategoria\r\n"
+					+ "where p.idcliente = ?");
+			pst.setInt(1, c.getIdCliente());
+			ResultSet rs= pst.executeQuery();
+			while(rs.next())
+			{
+				Clientes c1 = new Clientes(0, rs.getString("nombre"), rs.getString("p.direccionEnvio"),0);
+				lista.add(new Pedidos(0,c,rs.getDouble("precioTotal"),rs.getString("p.direccionEnvio"),rs.getDate("fecha")));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			Conexion.cierraConexion();
+		}
+		
+		return lista;
+}
 
 }
