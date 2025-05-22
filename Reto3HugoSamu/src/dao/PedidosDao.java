@@ -31,7 +31,8 @@ public class PedidosDao {
 			ResultSet rs = pst.getGeneratedKeys();
 			
 			if (rs.next()) {
-				pedido.setIdPedido(1);
+				pedido.setIdPedido(rs.getInt(1));
+				System.out.println("Holaa"+pedido.getIdPedido());
 			}
 			return pedido;
 		} catch (Exception e) {

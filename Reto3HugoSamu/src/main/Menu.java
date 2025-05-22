@@ -78,7 +78,7 @@ public class Menu {
 	}
 
 	public static void mostrarProductosBajoStock() {
-		List<Productos>listaBajoStock=dao.ProductosDao.productosXstock();
+		List<Productos> listaBajoStock = dao.ProductosDao.productosXstock();
 		for (Productos productos : listaBajoStock) {
 			System.out.println(productos);
 		}
@@ -166,12 +166,12 @@ public class Menu {
 				} while (!verificarIdCliente(codCliente));
 				Clientes clientePedido = dao.ClientesDao.buscarXcodigo(codCliente);
 				System.out.println(clientePedido.getCodigo() + " " + clientePedido.getNombre());
-				LocalDate hoy=LocalDate.now();
-				Date fecha=util.Validarfunciones.convierte_LocalDate_a_Date(hoy);
-				
-				
-				Pedidos ped=new Pedidos(0, clientePedido, 0, clientePedido.getDireccion(),(java.sql.Date) util.Validarfunciones.convierteFechaASQL(fecha));
-				ped=dao.PedidosDao.crearPedido(ped, clientePedido);
+				LocalDate hoy = LocalDate.now();
+				Date fecha = util.Validarfunciones.convierte_LocalDate_a_Date(hoy);
+
+				Pedidos ped = new Pedidos(0, clientePedido, 0, clientePedido.getDireccion(),
+						(java.sql.Date) util.Validarfunciones.convierteFechaASQL(fecha));
+				ped = dao.PedidosDao.crearPedido(ped, clientePedido);
 				String nombreProducto = "";
 				do {
 					nombreProducto = util.Validarfunciones
@@ -186,12 +186,11 @@ public class Menu {
 									.dimeEntero("Introduce la cantidad de unidades del producto", sc);
 							if (unidadesProducto > p.getStock()) {
 								unidadesProducto = p.getStock();
-							
 
 							}
-							PedidoProducto pP=new PedidoProducto(0, ped, p, unidadesProducto);
+							PedidoProducto pP = new PedidoProducto(0, ped, p, unidadesProducto);
 							dao.PedidoProductoDao.insertaProducto(productos, ped, pP);
-							
+
 						}
 
 					}
@@ -203,10 +202,12 @@ public class Menu {
 						clientePedido.setDireccion(direccionNueva);
 
 					}
-
+					//System.out.println("EL pedido se ha guardado");
+					break;
 				} while (!nombreProducto.equals("No"));
 
 				break;
+
 			case 2:
 
 				break;
