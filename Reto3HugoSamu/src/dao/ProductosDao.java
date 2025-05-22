@@ -21,8 +21,8 @@ public class ProductosDao {
 		ResultSet rs = pst.executeQuery(); 
 		while (rs.next()) 
 		{
-			Categorias cat = new Categorias(rs.getInt("idcategoria"), rs.getString("nombreCat"));
-		lista.add(new Productos(rs.getInt("idproducto"), cat, rs.getString("nombre"), rs.getDouble("precio"),
+			Categorias cat = new Categorias(rs.getInt("idcategoria"), rs.getString("nombre"));
+		lista.add(new Productos(0, cat, rs.getString("nombre"), rs.getDouble("precio"),
 						rs.getString("descripcion"), rs.getString("color"), rs.getString("talla"), rs.getInt("stock")));
 		}
 		rs.close();

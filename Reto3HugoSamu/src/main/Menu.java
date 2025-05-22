@@ -66,6 +66,14 @@ public class Menu {
 
 				} while (!verificarIdCliente(codCliente));
 				Clientes clientePedido = dao.ClientesDao.buscarXcodigo(codCliente);
+				List<Pedidos>listaXcliente=dao.PedidosDao.verPedidosCliente(clientePedido);
+				if (listaXcliente.size()==0) {
+					System.out.println("No hay pedidos para ese cliente");
+					
+				}
+				for (Pedidos pedidos : listaXcliente) {
+					System.out.println(pedidos);
+				}
 
 				break;
 			case 3:
@@ -205,7 +213,7 @@ public class Menu {
 					//System.out.println("EL pedido se ha guardado");
 					break;
 				} while (!nombreProducto.equals("No"));
-				
+				dao.PedidoProductoDao.actualizaprecio(ped);
 
 				break;
 
