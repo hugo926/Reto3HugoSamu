@@ -1,11 +1,15 @@
 package main;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
 import clases.Categorias;
 import clases.Clientes;
+import clases.PedidoProducto;
+import clases.Pedidos;
 import clases.Productos;
 import dao.ProductosDao;
 import util.Validarfunciones;
@@ -51,6 +55,7 @@ public class Menu {
 					.dimeEntero("4.1-.Bajo Stock\n4.2-.Pedidos por cliente\n4.3-.Productos mas vendidos\n4-.Salir", sc);
 			switch (opcion4) {
 			case 1:
+				mostrarProductosBajoStock();
 
 				break;
 			case 2:
@@ -70,6 +75,13 @@ public class Menu {
 				break;
 			}
 		} while (opcion4 != 4);
+	}
+
+	public static void mostrarProductosBajoStock() {
+		List<Productos> listaBajoStock = dao.ProductosDao.productosXstock();
+		for (Productos productos : listaBajoStock) {
+			System.out.println(productos);
+		}
 	}
 
 	public static void menuCatalogoProductos(Scanner sc) {
@@ -145,6 +157,7 @@ public class Menu {
 			switch (opcion3) {
 			case 1:
 				/// boolean salir = false;
+				///
 				int codCliente = 0;
 				do {
 
@@ -153,6 +166,12 @@ public class Menu {
 				} while (!verificarIdCliente(codCliente));
 				Clientes clientePedido = dao.ClientesDao.buscarXcodigo(codCliente);
 				System.out.println(clientePedido.getCodigo() + " " + clientePedido.getNombre());
+				LocalDate hoy = LocalDate.now();
+				Date fecha = util.Validarfunciones.convierte_LocalDate_a_Date(hoy);
+
+				Pedidos ped = new Pedidos(0, clientePedido, 0, clientePedido.getDireccion(),
+						(java.sql.Date) util.Validarfunciones.convierteFechaASQL(fecha));
+				ped = dao.PedidosDao.crearPedido(ped, clientePedido);
 				String nombreProducto = "";
 				do {
 					nombreProducto = util.Validarfunciones
@@ -169,6 +188,9 @@ public class Menu {
 								unidadesProducto = p.getStock();
 
 							}
+							PedidoProducto pP = new PedidoProducto(0, ped, p, unidadesProducto);
+							dao.PedidoProductoDao.insertaProducto(productos, ped, pP);
+
 						}
 
 					}
@@ -180,10 +202,12 @@ public class Menu {
 						clientePedido.setDireccion(direccionNueva);
 
 					}
-
+					//System.out.println("EL pedido se ha guardado");
+					break;
 				} while (!nombreProducto.equals("No"));
 
 				break;
+
 			case 2:
 
 				break;

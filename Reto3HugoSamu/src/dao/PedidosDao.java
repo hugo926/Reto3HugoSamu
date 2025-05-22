@@ -16,7 +16,7 @@ import util.Validarfunciones;
 
 public class PedidosDao {
 	
-	public static void crearPedido(Pedidos pedido, Clientes cli) {
+	public static Pedidos crearPedido(Pedidos pedido, Clientes cli) {
 
 		try {
 			Connection con = Conexion.abreConexion();
@@ -31,14 +31,17 @@ public class PedidosDao {
 			ResultSet rs = pst.getGeneratedKeys();
 			
 			if (rs.next()) {
-				pedido.setIdPedido(1);
+				pedido.setIdPedido(rs.getInt(1));
+				System.out.println("Holaa"+pedido.getIdPedido());
 			}
+			return pedido;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		finally {
 			Conexion.cierraConexion();
 		}
+		return pedido;
 	}
 	
 	public static List<Pedidos> listaPedidos (){
