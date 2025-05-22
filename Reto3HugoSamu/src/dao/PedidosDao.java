@@ -67,6 +67,14 @@ public class PedidosDao {
 	public static List<Pedidos> verPedidosMes () {
 			List<Pedidos> lista = new ArrayList<Pedidos>();
 			
+			/*select p.fecha, c.nombre, p.precioTotal, p.direccionEnvio, cat.nombre, pr.nombre, pp.unidades
+from pedidos p
+inner join clientes c on p.idcliente = c.idcliente
+inner join pedidoproducto pp on p.idpedido = pp.idpedido
+inner join productos pr on pp.idproducto = pr.idproducto
+inner join categorias cat on pr.idcategoria = cat.idcategoria
+where MONTH(p.fecha) = MONTH(now())
+order by fecha desc;*/
 			try {
 				Connection con = Conexion.abreConexion();
 				
