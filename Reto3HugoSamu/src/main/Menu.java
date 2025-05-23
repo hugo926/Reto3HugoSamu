@@ -1,17 +1,14 @@
 package main;
 
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
-
 import clases.Categorias;
 import clases.Clientes;
 import clases.PedidoProducto;
 import clases.Pedidos;
 import clases.Productos;
-import dao.ProductosDao;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
+import java.util.Scanner;
 import util.Validarfunciones;
 
 public class Menu {

@@ -1,39 +1,52 @@
 package clases;
 
+/**
+ * Clase que representa las categorias de productos
+ */
 public class Categorias {
 private int idCategorias;
 private String nombre;
 
-public Categorias(int idCategoria, String nombre) {
-	super();
-	this.idCategorias = idCategoria;
-	this.nombre = nombre;
-}
+    /**
+     * Constructor por defecto
+     */
+    public Categorias() {
+        super();
+    }
 
-
-public Categorias(int idCategorias) {
+    /**
+     * Constructor con todos los atributos
+     * @param int idCategoria IDcategoria 
+     * @param string nombre Nombre de la categoria
+     */
+    public Categorias(int idCategoria, String nombre) {
+		super();
+		this.idCategorias = idCategoria;
+		this.nombre = nombre;
+	}
+    
+    /**
+     * Constructor con id categorias
+     * @param int idCategoria IDcategoria 
+     */
+    public Categorias(int idCategorias) {
 	super();
 	this.idCategorias = idCategorias;
 }
 
+    public int getIdCategoria() {
+        return idCategorias;
+    }
 
-public Categorias() {
-	super();
-}
+    public void setIdCategoria(int idCategoria) {
+        this.idCategorias = idCategoria;
+    }
 
-public int getIdCategoria() {
-	return idCategorias;
-}
+    public String getNombre() {
+        return nombre;
+    }
 
-public void setIdCategoria(int idCategoria) {
-	this.idCategorias = idCategoria;
-}
-
-public String getNombre() {
-	return nombre;
-}
-
-public void setNombre(String nombre) {
+    public void setNombre(String nombre) {
 	this.nombre = nombre;
 }
 

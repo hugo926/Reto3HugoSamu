@@ -1,6 +1,10 @@
 package clases;
 
+/**
+ * Clase que representa los productos
+ */
 public class Productos {
+
 	private int idProducto;
 	private Categorias idCategoria;
 	private String nombre;
@@ -10,6 +14,24 @@ public class Productos {
 	private String talla;
 	private int Stock;
 
+	/**
+	 * Constructor por defecto
+	 */
+	public Productos() {
+		super();
+	}
+
+	/**
+	 * Constructor con todos los atributos
+	 * @param int idProducto ID del producto
+	 * @param Categorias idCategoria idCategoria del produtco
+	 * @param string nombre Nombre del producto
+	 * @param double precio Precio del producto
+	 * @param string descripcion Descripcion del producto
+	 * @param string color Color del producto
+	 * @param int talla Talla del producto
+	 * @param int stock Cantidad disponible
+	 */
 	public Productos(int idProducto, Categorias idCategoria, String nombre, double precio, String descripcion,
 			String color, String talla, int stock) {
 		super();
@@ -21,10 +43,6 @@ public class Productos {
 		this.color = color;
 		this.talla = talla;
 		Stock = stock;
-	}
-
-	public Productos() {
-		super();
 	}
 
 	public Productos(String nombre) {
@@ -48,7 +66,7 @@ public class Productos {
 	public void setIdProducto(int idProducto) {
 		this.idProducto = idProducto;
 	}
-
+	
 	public Categorias getIdCategoria() {
 		return idCategoria;
 	}
@@ -65,10 +83,11 @@ public class Productos {
 		this.nombre = nombre;
 	}
 
+
 	public double getPrecio() {
 		return precio;
 	}
-
+	
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}

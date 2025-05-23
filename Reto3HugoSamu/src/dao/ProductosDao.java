@@ -12,6 +12,11 @@ import clases.Productos;
 import util.Conexion;
 
 public class ProductosDao {
+	
+	/**
+     * Lista productos cuyo stock es igual o menor a 5 unidades.
+     * @return Lista de productos productos
+     */
 	public static List<Productos> productosXstock(){
 		List<Productos> lista = new ArrayList<Productos>();
 		try {
@@ -35,7 +40,11 @@ public class ProductosDao {
 
 	return lista;
 	}
-
+	
+	/**
+     * Lista todos los productos
+     * @return Lista de Productos productos
+     */
 	public static List<Productos> listaProductos() {
 
 		List<Productos> lista = new ArrayList<Productos>();
@@ -64,6 +73,11 @@ public class ProductosDao {
 
 	}
 
+	/**
+     * Lista productos filtrados por una categoría dada
+     * @param Categorias catego a filtrar.
+     * @return Lista de productos que pertenecen a la categoría.
+     */
 	public static List<Productos> listaProductosXcategoria(Categorias catego) {
 
 		List<Productos> lista = new ArrayList<Productos>();
@@ -95,7 +109,14 @@ public class ProductosDao {
 		return lista;
 
 	}
-
+	
+	/**
+     * Busca productos por nombre, talla y color.
+     * @param string nombre Nombre del producto.
+     * @param string talla Talla del producto.
+     * @param string color Color del producto.
+     * @return Lista de productos que coinciden con los filtros.
+     */
 	public static List<Productos> buscarProducto(String nombre, String talla, String color) {
 
 		
@@ -133,6 +154,11 @@ public class ProductosDao {
 		return lista;
 	}
 	
+	/**
+     * Busca un producto por su nombre
+     * @param string nombre Nombre del producto.
+     * @return Productos Producto encontrado o vacío si no existe.
+     */
 	public static Productos buscarProductoXNombre(String nombre) {
 
 		Productos p = new Productos();
@@ -197,7 +223,12 @@ public class ProductosDao {
 			pst.setString(3, color);
 		}
 	}
-
+	
+	 /**
+     * Inserta un nuevo producto 
+     * @param productos producto Producto a insertar.
+     * @return Producto con su ID asignado.
+     */
 	public static Productos insertaProducto(Productos producto) {
 
 		try {

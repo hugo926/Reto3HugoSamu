@@ -11,6 +11,11 @@ import clases.Categorias;
 import util.Conexion;
 
 public class CategoriasDao {
+	
+	/**
+     * Devuelve una lista de tipo categorías
+     * @return Lista de Categorias.
+     */
 	public static List<Categorias> lista (){
 		List<Categorias> lista= new ArrayList<Categorias>();
 		try {
@@ -29,6 +34,10 @@ public class CategoriasDao {
 		}
 		return lista;
 	}
+	/**
+     * Inserta una nueva categoría de tipo categorias
+     * @param categorias de tipo Categoría a insertar.
+     */
 public static void inserta(Categorias categorias) {
 		
 

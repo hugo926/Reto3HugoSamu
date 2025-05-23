@@ -12,6 +12,11 @@ import clases.Clientes;
 import util.Conexion;
 
 public class ClientesDao {
+	
+	/**
+     * Lista todos los clientes de tipo clientes
+     * @return Lista de Clientes.
+     */
 	public static List<Clientes> lista (){
 		List<Clientes> lista= new ArrayList<Clientes>();
 		try {
@@ -30,6 +35,11 @@ public class ClientesDao {
 		}
 		return lista;
 	}
+	
+	 /**
+     * Inserta un nuevo cliente de tipo cliente
+     * @param clien Cliente a insertar.
+     */
 	public static void inserta(Clientes clien) {
 		try {
 			Connection con= Conexion.abreConexion();
@@ -49,6 +59,12 @@ public class ClientesDao {
 			Conexion.cierraConexion();
 		}
 	}
+	
+	/**
+     * Busca un cliente según su código único.
+     * @param int cod Código del cliente.
+     * @return cliente Clientes
+     */
 	public static Clientes buscarXcodigo(int cod) {
 	
 		Clientes c=null;	
@@ -68,6 +84,11 @@ public class ClientesDao {
 		}
 		return c;
 	}
+	
+	/**
+     * Actualiza los datos de un cliente
+     * @param c Cliente con datos actualizados.
+     */
 	public static void actualiza(Clientes c) {
 		try {
 			Connection con= Conexion.abreConexion();

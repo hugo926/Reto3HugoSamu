@@ -10,9 +10,14 @@ import clases.Productos;
 import util.Conexion;
 
 public class PedidoProductoDao {
-
+	
+	/**
+     * Inserta un producto
+     * @param productos producto  
+     * @param pedidos pedido 
+     * @param pedidoProducto pp  
+     */
 	public static void insertaProducto(Productos producto, Pedidos pedido, PedidoProducto pp) {
-
 		try {
 			// System.out.println("hola " + pedido.getIdPedido());
 			Connection con = Conexion.abreConexion();
@@ -39,9 +44,13 @@ public class PedidoProductoDao {
 			Conexion.cierraConexion();
 		}
 	}
-public static void actualizaprecio(Pedidos pedido) {
 	
 
+    /**
+     * Actualiza el precio
+     * @param pedidos pedido a actualizar.
+     */
+public static void actualizaprecio(Pedidos pedido) {
 
 	try {
 		// System.out.println("hola " + pedido.getIdPedido());

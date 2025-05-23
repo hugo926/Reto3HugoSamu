@@ -16,6 +16,12 @@ import util.Validarfunciones;
 
 public class PedidosDao {
 	
+	/**
+     * Crea un nuevo pedido
+     * @param pedidos Pedido con los datos del nuevo pedido.
+     * @param Clientes Cli asociado al pedido.
+     * @return rl pedido con su ID actualizado.
+     */
 	public static Pedidos crearPedido(Pedidos pedido, Clientes cli) {
 
 		try {
@@ -44,6 +50,10 @@ public class PedidosDao {
 		return pedido;
 	}
 	
+	 /**
+     * Lista todos los pedidos
+     * @return Lista de Pedidos de tipo pedidos
+     */
 	public static List<Pedidos> listaPedidos (){
 		List<Pedidos> lista= new ArrayList<Pedidos>();
 		try {
@@ -65,6 +75,10 @@ public class PedidosDao {
 		return lista;
 	}
 	
+	 /**
+     * Lista los pedidos realizados en el mes actual.
+     * @return Lista de pedidos Pedidos filtrados por mes.
+     */
 	public static List<Pedidos> verPedidosMes () {
 			List<Pedidos> lista = new ArrayList<Pedidos>();
 			
@@ -98,6 +112,11 @@ public class PedidosDao {
 			return lista;
 	}
 	
+	/**
+     * Lista los pedidos realizados por un cliente
+     * @param clientes c Cliente del que se quieren ver los pedidos
+     * @return Lista de pedidos asociados al cliente
+     */
 	public static List<Pedidos> verPedidosCliente (Clientes c) {
 		List<Pedidos> lista = new ArrayList<Pedidos>();
 		

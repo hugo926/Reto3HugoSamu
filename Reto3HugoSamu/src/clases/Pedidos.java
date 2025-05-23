@@ -2,17 +2,31 @@ package clases;
 
 import java.sql.Date;
 
+/**
+ * Clase que representa los pedidos
+ */
 public class Pedidos {
-	private int idPedido;
-	private Clientes idCliente;
-	private double precioToatal;
-	private String direccEnvio;
-	private Date fecha;
+    private int idPedido;
+    private Clientes idCliente;
+    private double precioToatal;
+    private String direccEnvio;
+    private Date fecha;
 	
+	/**
+	 * Constructor por defecto
+	 */
 	public Pedidos() {
 		super();
 	}
 
+	/**
+	 * Constructor con todos los atributos
+	 * @param int idPedido ID del pedido
+	 * @param Clientes idCliente id del Cliente que realiza el pedido
+	 * @param double precioToatal Precio total del pedido
+	 * @param string direccEnvio Direccion de envio
+	 * @param Date fecha Fecha del pedido
+	 */
 	public Pedidos(int idPedido, Clientes idCliente, double precioToatal, String direccEnvio, Date fecha) {
 		super();
 		this.idPedido = idPedido;
@@ -22,19 +36,19 @@ public class Pedidos {
 		this.fecha = fecha;
 	}
 
-	public int getIdPedido() {
-		return idPedido;
-	}
+    public int getIdPedido() {
+        return idPedido;
+    }
 
-	public void setIdPedido(int idPedido) {
-		this.idPedido = idPedido;
-	}
+    public void setIdPedido(int idPedido) {
+        this.idPedido = idPedido;
+    }
 
-	public Clientes getIdCliente() {
-		return idCliente;
-	}
+    public Clientes getIdCliente() {
+        return idCliente;
+    }
 
-	public void setIdCliente(Clientes idCliente) {
+    public void setIdCliente(Clientes idCliente) {
 		this.idCliente = idCliente;
 	}
 
